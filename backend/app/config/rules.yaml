@@ -1,0 +1,217 @@
+rules:
+  # Termination Rules
+  - rule_code: "TERM_UNILATERAL"
+    category: "Termination"
+    severity: "High"
+    points: 75
+    pattern_type: "regex_any"
+    pattern_value: '(?i)(sole\s+discretion\s+to\s+terminate|unilateral(ly)?\s+terminate|company\s+may\s+terminate\s+at\s+any\s+time\s+without\s+cause|right\s+to\s+terminate\s+without\s+reciprocal)'
+    reason: "Unilateral termination right allows one party to end agreement at will without providing mutual rights."
+    suggestion: "Request mutual termination for convenience or bilateral termination provisions."
+    is_enabled: true
+
+  - rule_code: "TERM_NO_NOTICE"
+    category: "Termination"
+    severity: "High"
+    points: 70
+    pattern_type: "regex_any"
+    pattern_value: '(?i)(without\s+(prior\s+)?notice|immediately\s+without\s+notice|0\s+days?\s+notice|terminate\s+effective\s+immediately)'
+    reason: "Allows immediate termination without any advance notice period."
+    suggestion: "Require at least 30 days prior written notice before termination takes effect."
+    is_enabled: true
+
+  - rule_code: "TERM_SHORT_NOTICE"
+    category: "Termination"
+    severity: "Medium"
+    points: 45
+    pattern_type: "numeric_threshold"
+    pattern_value: '{"field": "notice_days", "operator": "<", "threshold": 15}'
+    reason: "Termination notice period is shorter than standard commercial practice (less than 15 days)."
+    suggestion: "Negotiate an extension of the notice period to 30 or 60 days."
+    is_enabled: true
+
+  - rule_code: "TERM_FAIR"
+    category: "Termination"
+    severity: "Low"
+    points: 10
+    pattern_type: "regex_any"
+    pattern_value: '(?i)(either\s+party\s+may\s+terminate\s+upon\s+(at\s+least\s+)?(30|60|90)\s+days|mutual(ly)?\s+agree(d)?\s+to\s+terminate)'
+    reason: "Balanced termination clause providing mutual rights and standard notice."
+    suggestion: "Clause aligns with standard commercial norms."
+    is_enabled: true
+
+  # Limitation of Liability Rules
+  - rule_code: "LIAB_UNLIMITED"
+    category: "Limitation of Liability"
+    severity: "High"
+    points: 85
+    pattern_type: "regex_any"
+    pattern_value: '(?i)(shall\s+not\s+be\s+limited|unlimited\s+liability|no\s+limitation\s+of\s+liability|disclaims?\s+all\s+liability\s+whatsoever|in\s+no\s+event\s+shall\s+(vendor|company|provider)\s+be\s+liable)'
+    reason: "Imposes unlimited liability on one party or completely disclaims all liability for the other."
+    suggestion: "Insist on a mutual liability cap tied to fees paid over a 12-month period."
+    is_enabled: true
+
+  - rule_code: "LIAB_LOW_CAP"
+    category: "Limitation of Liability"
+    severity: "Medium"
+    points: 55
+    pattern_type: "regex_any"
+    pattern_value: '(?i)(capped\s+at\s+(\$|usd\s*)?(100|50|10)|total\s+liability\s+shall\s+not\s+exceed\s+(\$|usd\s*)?(100|500)|fees\s+paid\s+in\s+the\s+preceding\s+one\s+month)'
+    reason: "Liability is capped at an unreasonably nominal amount or only 1 month of fees."
+    suggestion: "Expand liability cap to 12 months of fees paid or aggregate contract value."
+    is_enabled: true
+
+  - rule_code: "LIAB_CAP_OK"
+    category: "Limitation of Liability"
+    severity: "Low"
+    points: 10
+    pattern_type: "regex_any"
+    pattern_value: '(?i)(fees\s+paid\s+or\s+payable\s+in\s+the\s+(preceding\s+)?12\s+months|mutual(ly)?\s+capped\s+at\s+the\s+total\s+fees)'
+    reason: "Liability is mutually capped at standard 12-month trailing fees."
+    suggestion: "Standard balanced liability provision."
+    is_enabled: true
+
+  # Confidentiality Rules
+  - rule_code: "CONF_INDEFINITE"
+    category: "Confidentiality"
+    severity: "Medium"
+    points: 40
+    pattern_type: "regex_any"
+    pattern_value: '(?i)(in\s+perpetuity|perpetual(ly)?|indefinite(ly)?|shall\s+survive\s+indefinitely|no\s+expiration\s+of\s+confidentiality)'
+    reason: "Confidentiality obligations survive indefinitely or in perpetuity without standard trade secret exceptions."
+    suggestion: "Limit general confidentiality obligations to 3 to 5 years post-termination, with perpetuity reserved strictly for trade secrets."
+    is_enabled: true
+
+  - rule_code: "CONF_LONG_TERM"
+    category: "Confidentiality"
+    severity: "Medium"
+    points: 35
+    pattern_type: "numeric_threshold"
+    pattern_value: '{"field": "confidentiality_years", "operator": ">", "threshold": 5}'
+    reason: "Confidentiality term exceeds 5 years."
+    suggestion: "Align confidentiality term to standard 2-3 years."
+    is_enabled: true
+
+  - rule_code: "CONF_FAIR"
+    category: "Confidentiality"
+    severity: "Low"
+    points: 10
+    pattern_type: "regex_any"
+    pattern_value: '(?i)(survive\s+for\s+a\s+period\s+of\s+(two|three|2|3)\s+years|standard\s+exceptions\s+apply|publicly\s+known\s+through\s+no\s+breach)'
+    reason: "Standard confidentiality duration with customary carve-outs."
+    suggestion: "Clause is commercially balanced."
+    is_enabled: true
+
+  # Indemnification Rules
+  - rule_code: "INDEM_NEGLIGENCE"
+    category: "Indemnification"
+    severity: "High"
+    points: 85
+    pattern_type: "regex_any"
+    pattern_value: '(?i)(indemnify.*for\s+(its\s+own|their\s+own)\s+(gross\s+)?negligence|regardless\s+of\s+(sole\s+)?negligence|indemnify.*regardless\s+of\s+fault)'
+    reason: "Requires one party to indemnify the other even for the other's own negligence or misconduct."
+    suggestion: "Carve out gross negligence, willful misconduct, and breach by the indemnified party."
+    is_enabled: true
+
+  - rule_code: "INDEM_BROAD"
+    category: "Indemnification"
+    severity: "High"
+    points: 70
+    pattern_type: "regex_any"
+    pattern_value: '(?i)(indemnify,\s*defend\s*and\s*hold\s*harmless.*any\s*and\s*all\s*claims|unilateral(ly)?\s+indemnif(y|ies)|all\s+losses,\s+damages,\s+consequential)'
+    reason: "Broad, one-sided indemnification covering indirect damages or unspecified third-party claims."
+    suggestion: "Limit indemnification to direct third-party claims arising from material breach or IP infringement."
+    is_enabled: true
+
+  - rule_code: "INDEM_MUTUAL"
+    category: "Indemnification"
+    severity: "Low"
+    points: 10
+    pattern_type: "regex_any"
+    pattern_value: '(?i)(each\s+party\s+shall\s+defend,\s*indemnify|mutual(ly)?\s+indemnif(y|ication)|limited\s+to\s+third-party\s+intellectual\s+property)'
+    reason: "Mutual indemnification standardly scoped to third-party IP infringement."
+    suggestion: "Clause aligns with fair bilateral commercial contracting."
+    is_enabled: true
+
+  # Auto-Renewal Rules
+  - rule_code: "RENEW_AUTO_SHORT"
+    category: "Auto-Renewal"
+    severity: "Medium"
+    points: 50
+    pattern_type: "regex_any"
+    pattern_value: '(?i)(automatically\s+renew.*unless\s+notice\s+is\s+given\s+(at\s+least\s+)?(90|120)\s+days|opt-out\s+within\s+(24|48)\s+hours|unreasonable\s+cancellation\s+window)'
+    reason: "Auto-renews unless cancellation notice is given unusually early (e.g. 90+ days) or within a restrictive window."
+    suggestion: "Negotiate a standard 30-day non-renewal notification window with renewal reminder notifications."
+    is_enabled: true
+
+  - rule_code: "RENEW_AUTO_LONG"
+    category: "Auto-Renewal"
+    severity: "Medium"
+    points: 45
+    pattern_type: "regex_any"
+    pattern_value: '(?i)(automatically\s+renew.*for\s+(successive\s+)?(two|three|five|2|3|5)\s+years|renew\s+for\s+multi-year\s+periods)'
+    reason: "Auto-renews for excessive multi-year periods upon expiration."
+    suggestion: "Adjust automatic renewal period to one-year increments or month-to-month."
+    is_enabled: true
+
+  - rule_code: "RENEW_MANUAL"
+    category: "Auto-Renewal"
+    severity: "Low"
+    points: 10
+    pattern_type: "regex_any"
+    pattern_value: '(?i)(shall\s+not\s+automatically\s+renew|only\s+upon\s+mutual\s+written\s+agreement|manual\s+renewal|express\s+written\s+consent)'
+    reason: "Requires explicit mutual written consent to renew."
+    suggestion: "No auto-renewal trap; contract requires proactive renewal."
+    is_enabled: true
+
+  # Payment Rules
+  - rule_code: "PAY_DISCRETION"
+    category: "Payment"
+    severity: "High"
+    points: 65
+    pattern_type: "regex_any"
+    pattern_value: '(?i)(sole\s+discretion\s+to\s+increase\s+(fees|prices)|price\s+increase\s+without\s+notice|modify\s+rates\s+at\s+any\s+time\s+without\s+right\s+to\s+terminate)'
+    reason: "Permits unilateral fee or price increases without customer consent or cancellation right."
+    suggestion: "Cap annual increases to CPI or fixed % (e.g., 3-5%) with advance written notice and right to terminate."
+    is_enabled: true
+
+  - rule_code: "PAY_VAGUE"
+    category: "Payment"
+    severity: "Medium"
+    points: 40
+    pattern_type: "regex_any"
+    pattern_value: '(?i)(undetermined\s+fees|expenses\s+as\s+deemed\s+necessary|arbitrary\s+penalt(y|ies)|payable\s+on\s+demand\s+without\s+invoice)'
+    reason: "Payment terms or fee calculation mechanisms are vague or undefined."
+    suggestion: "Specify exact invoice schedule, defined deliverables, and clear payment dispute procedures."
+    is_enabled: true
+
+  - rule_code: "PAY_CLEAR"
+    category: "Payment"
+    severity: "Low"
+    points: 10
+    pattern_type: "regex_any"
+    pattern_value: '(?i)(net\s+(30|60)\s+days|payable\s+within\s+30\s+days\s+of\s+receipt\s+of\s+invoice|detailed\s+in\s+exhibit\s+a)'
+    reason: "Clear Net 30/60 invoicing and payment procedure."
+    suggestion: "Standard commercial payment terms."
+    is_enabled: true
+
+  # Dispute Resolution Rules
+  - rule_code: "DISP_ARB_FAR"
+    category: "Dispute Resolution"
+    severity: "Medium"
+    points: 55
+    pattern_type: "regex_any"
+    pattern_value: '(?i)(exclusive\s+jurisdiction\s+in.*(remote|foreign|distant)|mandatory\s+arbitration\s+in\s+(london|singapore|switzerland|delaware)\s+regardless|waives\s+all\s+rights\s+to\s+jury\s+trial\s+and\s+class\s+actions)'
+    reason: "Mandates dispute resolution in a distant, costly, or foreign forum with jury/class action waivers."
+    suggestion: "Specify a mutually convenient forum or home jurisdiction of the defendant."
+    is_enabled: true
+
+  - rule_code: "DISP_MUTUAL"
+    category: "Dispute Resolution"
+    severity: "Low"
+    points: 10
+    pattern_type: "regex_any"
+    pattern_value: '(?i)(good\s+faith\s+negotiation\s+prior\s+to|mutually\s+agreed\s+arbitrator|governed\s+by\s+the\s+laws\s+of\s+the\s+state\s+where\s+work\s+is\s+performed)'
+    reason: "Includes good faith pre-dispute escalation and reasonable governing law."
+    suggestion: "Commercially reasonable dispute resolution mechanism."
+    is_enabled: true

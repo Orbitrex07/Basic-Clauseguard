@@ -1,0 +1,20 @@
+{
+  "dataset_name": "coastalcph/lex_glue",
+  "dataset_config": "ledgar",
+  "splits": {
+    "train": 60000,
+    "test": 10000,
+    "validation": 10000
+  },
+  "num_source_labels": 100,
+  "canonical_distribution": {
+    "Other": 79,
+    "Dispute Resolution": 10,
+    "Confidentiality": 1,
+    "Payment": 5,
+    "Indemnification": 2,
+    "Limitation of Liability": 2,
+    "Termination": 1
+  },
+  "sample_text": "Except as otherwise set forth in this Debenture, the Company, for itself and its legal representatives, successors and assigns, expressly waives presentment, protest, demand, notice of dishonor, notic"
+}

@@ -1,0 +1,52 @@
+# Environments
+.env
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+
+# Node / Frontend
+node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Uploads & Generated Reports
+data/uploads/*
+!data/uploads/.gitkeep
+data/reports/*
+!data/reports/.gitkeep
+backend/data/uploads/*
+!backend/data/uploads/.gitkeep
+backend/data/reports/*
+!backend/data/reports/.gitkeep
+
+# ML Datasets & Weights
+models/classifier/*
+!models/classifier/.gitkeep
+models/extractor/*
+!models/extractor/.gitkeep
+ml/data/
+*.pt
+*.bin
+*.safetensors
+*.onnx
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs & Testing
+*.log
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE & Editor
+.vscode/
+.idea/

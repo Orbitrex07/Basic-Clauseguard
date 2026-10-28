@@ -1,0 +1,143 @@
+{
+  "evaluation_timestamp": "2026-10-08T19:01:47Z",
+  "device": "cuda",
+  "cuda_available": true,
+  "classifier": {
+    "model_path": "C:\\Users\\anupd\\Desktop\\Basic Claudeguard\\models/classifier",
+    "mode": "mock",
+    "tested_samples": 7,
+    "accuracy": 85.71,
+    "macro_f1": 0.8143,
+    "predictions": [
+      {
+        "text": "Either party may terminate this Agreement without cause upon...",
+        "expected": "Termination",
+        "predicted_source": "Termination",
+        "canonical": "Termination",
+        "confidence": 0.44,
+        "correct": true
+      },
+      {
+        "text": "In no event shall either party's aggregate liability under t...",
+        "expected": "Limitation of Liability",
+        "predicted_source": "Limitation of Liability",
+        "canonical": "Limitation of Liability",
+        "confidence": 0.6,
+        "correct": true
+      },
+      {
+        "text": "The Receiving Party agrees to maintain in strict confidence ...",
+        "expected": "Confidentiality",
+        "predicted_source": "Confidentiality",
+        "canonical": "Confidentiality",
+        "confidence": 0.6,
+        "correct": true
+      },
+      {
+        "text": "Provider shall indemnify, defend, and hold harmless Client a...",
+        "expected": "Indemnification",
+        "predicted_source": "Indemnification",
+        "canonical": "Indemnification",
+        "confidence": 0.74,
+        "correct": true
+      },
+      {
+        "text": "This Agreement shall automatically renew for successive term...",
+        "expected": "Auto-Renewal",
+        "predicted_source": "Termination",
+        "canonical": "Other",
+        "confidence": 0.47,
+        "correct": false
+      },
+      {
+        "text": "Client shall pay all undisputed invoices within thirty (30) ...",
+        "expected": "Payment",
+        "predicted_source": "Payment",
+        "canonical": "Payment",
+        "confidence": 0.6,
+        "correct": true
+      },
+      {
+        "text": "Any dispute, controversy, or claim arising out of this Agree...",
+        "expected": "Dispute Resolution",
+        "predicted_source": "Dispute Resolution",
+        "canonical": "Dispute Resolution",
+        "confidence": 0.6,
+        "correct": true
+      }
+    ]
+  },
+  "extractor": {
+    "model_path": "C:\\Users\\anupd\\Desktop\\Basic Claudeguard\\models/extractor",
+    "mode": "mock",
+    "tested_samples": 7,
+    "exact_match": 85.71,
+    "f1": 92.57,
+    "predictions": [
+      {
+        "category": "Termination",
+        "question": "What is the notice period required to terminate?",
+        "extracted_spans": {
+          "What is the notice period required to terminate?": "without cause",
+          "Does a party have the right to terminate for convenience?": "without cause"
+        },
+        "parsed_entities": {}
+      },
+      {
+        "category": "Limitation of Liability",
+        "question": "What is the cap or limitation on liability?",
+        "extracted_spans": {},
+        "parsed_entities": {}
+      },
+      {
+        "category": "Confidentiality",
+        "question": "How long do confidentiality obligations survive post-termination?",
+        "extracted_spans": {
+          "How long do confidentiality obligations survive post-termination?": "for three (3) years",
+          "What are the standard exceptions to confidentiality?": "for three (3) years"
+        },
+        "parsed_entities": {}
+      },
+      {
+        "category": "Indemnification",
+        "question": "What is the scope of indemnification obligations?",
+        "extracted_spans": {
+          "What is the scope of indemnification obligations?": "gross negligence or willful misconduct",
+          "Does indemnification include third-party intellectual property infringement?": "gross negligence or willful misconduct"
+        },
+        "parsed_entities": {}
+      },
+      {
+        "category": "Auto-Renewal",
+        "question": "What is the renewal notice requirement?",
+        "extracted_spans": {
+          "Does the agreement automatically renew?": "automatically renew for successive terms of one (1) year unless either party gives written notice of non-renewal at least 30 days prior",
+          "What is the renewal notice window?": "automatically renew for successive terms of one (1) year unless either party gives written notice of non-renewal at least 30 days prior"
+        },
+        "parsed_entities": {
+          "days": 30,
+          "notice_days": 30
+        }
+      },
+      {
+        "category": "Payment",
+        "question": "What are the payment terms and schedule?",
+        "extracted_spans": {
+          "What are the payment terms, due dates, or invoicing intervals?": "all undisputed invoices within thirty (30) days of receipt"
+        },
+        "parsed_entities": {
+          "percentages": 1.5
+        }
+      },
+      {
+        "category": "Dispute Resolution",
+        "question": "What is the dispute resolution or governing law process?",
+        "extracted_spans": {
+          "What is the governing law and jurisdiction?": "arbitration administered by the AAA in New York, NY",
+          "Is mandatory arbitration or mediation required?": "arbitration administered by the AAA in New York, NY"
+        },
+        "parsed_entities": {}
+      }
+    ]
+  }
+}

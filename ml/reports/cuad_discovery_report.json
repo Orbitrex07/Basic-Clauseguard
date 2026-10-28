@@ -1,0 +1,68 @@
+{
+  "dataset_name": "cuad",
+  "is_live_download": false,
+  "num_questions": 25,
+  "questions": [
+    "What is the document name?",
+    "Who are the parties to the agreement?",
+    "What is the effective date of the agreement?",
+    "What is the expiration date of the agreement?",
+    "What is the renewal term of the agreement?",
+    "What is the notice period required to terminate renewal?",
+    "Does a party have the right to terminate for convenience?",
+    "What is the notice period required to terminate for convenience?",
+    "Is there an automatic renewal provision?",
+    "What is the governing law?",
+    "What is the exclusive jurisdiction or venue?",
+    "Is mandatory arbitration required?",
+    "What is the cap or limitation on liability?",
+    "Is there an uncapped liability provision?",
+    "Are consequential or indirect damages excluded?",
+    "What is the scope of indemnification obligations?",
+    "Does indemnification include third-party intellectual property infringement?",
+    "How long do confidentiality obligations survive post-termination?",
+    "What are the payment terms, due dates, or invoicing intervals?",
+    "Are there price increase caps or late payment fees?",
+    "Is there a non-compete obligation?",
+    "Is there an exclusivity obligation?",
+    "Is there a most-favored-nation clause?",
+    "Is assignment of the contract restricted?",
+    "Is change of control considered an assignment?"
+  ],
+  "cuad_category_mapping": {
+    "Termination": [
+      "What is the notice period required to terminate renewal?",
+      "Does a party have the right to terminate for convenience?",
+      "What is the notice period required to terminate for convenience?",
+      "How long do confidentiality obligations survive post-termination?"
+    ],
+    "Payment": [
+      "What are the payment terms, due dates, or invoicing intervals?",
+      "Are there price increase caps or late payment fees?"
+    ],
+    "Limitation of Liability": [
+      "What is the cap or limitation on liability?",
+      "Is there an uncapped liability provision?",
+      "Are consequential or indirect damages excluded?",
+      "Are there price increase caps or late payment fees?"
+    ],
+    "Confidentiality": [
+      "How long do confidentiality obligations survive post-termination?"
+    ],
+    "Indemnification": [
+      "What is the scope of indemnification obligations?",
+      "Does indemnification include third-party intellectual property infringement?"
+    ],
+    "Auto-Renewal": [
+      "What is the expiration date of the agreement?",
+      "What is the renewal term of the agreement?",
+      "What is the notice period required to terminate renewal?",
+      "Is there an automatic renewal provision?"
+    ],
+    "Dispute Resolution": [
+      "What is the governing law?",
+      "What is the exclusive jurisdiction or venue?",
+      "Is mandatory arbitration required?"
+    ]
+  }
+}
